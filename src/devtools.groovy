@@ -4,6 +4,10 @@
  * Improve command line parsing
  */
 
+// Fixed Error for unable to resolve class CliBuilder
+// 由于 groovy.util.CliBuilder类已弃用，需要手动 import groovy.cli.picocli.CliBuilder
+// https://blog.csdn.net/danpie3295/article/details/106779149
+import groovy.cli.commons.CliBuilder
 
 gfx_command_map = ['on' : 'visual_bars', 'off' : 'false', 'lines' : 'visual_lines']
 layout_command_map = ['on' : 'true', 'off' : 'false']
