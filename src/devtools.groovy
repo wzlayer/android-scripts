@@ -11,15 +11,17 @@ import groovy.cli.commons.CliBuilder
 
 gfx_command_map = ['on' : 'visual_bars', 'off' : 'false', 'lines' : 'visual_lines']
 layout_command_map = ['on' : 'true', 'off' : 'false']
+input_command_map = ['on' : '1', 'off' : '0']
 overdraw_command_map = ['on' : 'show',  'off' : 'false', 'deut' : 'show_deuteranomaly']
 overdraw_command_map_preKitKat = ['on' : 'true',  'off' : 'false']
 show_updates_map = ['on' : '0',  'off' : '1']
 wifi_command_map = ['on' : 'enable', 'off' : 'disable']
 data_command_map = ['on' : 'enable', 'off' : 'disable']
 
-
+// https://developer.android.com/studio/debug/dev-options?hl=zh-cn
 command_map = ['gfx' : gfx_command_map,
-               'layout' : layout_command_map,
+               'layout(启用/关闭指针位置)' : layout_command_map,
+               'input' : input_command_map,
                'overdraw' : overdraw_command_map,
                'updates' : show_updates_map,
                'wifi' : wifi_command_map,
@@ -99,6 +101,10 @@ switch ( command ) {
         break
     case "data":
         adbcmd = "shell svc data "+data_command_map[option]
+        executeADBCommand(adbcmd)
+        break
+    case "input":
+        adbcmd = "shell settings put system pointer_location "+input_command_map[option]
         executeADBCommand(adbcmd)
         break
     default:
